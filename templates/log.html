@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{% block title %} Log de Eventos {% endblock %}</h1>
+<table>
+  <tr>
+    <th>Nivel de PH</th>
+    <th>Temperatura (°C)</th>
+    <th>Humedad (%)</th>
+    <th>Luminosidad (Lx)</th>
+    <th>Nivel de Agua (cm)</th>
+    <th>Marca de Tiempo</th>
+  </tr>
+  {% for log in logs %}
+  <tr class="post">
+    <td>{{ log['ph_level'] }}</td>
+    <td>{{ log['temperature_level'] }}</td>
+    <td>{{ log['humidity_level'] }}</td>
+    <td>{{ log['luminosity_level'] }}</td>
+    <td>{{ log['water_level'] }}</td>
+    <td>{{ log['created'] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
