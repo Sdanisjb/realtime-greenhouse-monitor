@@ -14,9 +14,9 @@ var humidityMeasure = document.getElementById("humidity-measure");
 var luminosityMeasure = document.getElementById("luminosity-measure");
 var waterLevelMeasure = document.getElementById("water-level-measure");
 parametersChannel.bind("update", function (data) {
-  phMeasure.innerText = parseInt(data.ph);
-  temperatureMeasure.innerText = parseInt(data.temperature);
-  humidityMeasure.innerText = parseInt(data.humidity);
-  luminosityMeasure.innerText = parseInt(data.luminosity);
-  waterLevelMeasure.innerText = parseInt(data.water_level);
+  phMeasure.innerText = parseFloat(data.ph);
+  temperatureMeasure.innerText = parseFloat(data.temperature);
+  humidityMeasure.innerText = parseFloat(data.humidity);
+  luminosityMeasure.innerText = parseFloat(data.luminosity);
+  waterLevelMeasure.innerText = parseFloat(data.water_level);
 });
