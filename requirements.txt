@@ -11,3 +11,4 @@ SQLAlchemy==1.4.36
 sqlparse==0.4.3
 virtualenv==20.23.0
 pusher
+Werkzeug==2.2.2
