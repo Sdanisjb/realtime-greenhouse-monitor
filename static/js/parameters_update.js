@@ -6,6 +6,7 @@ const pusher = new Pusher("7bcef49942abe5d0aee5", {
 
 // Subscribe to poll trigger
 var parametersChannel = pusher.subscribe("parameters");
+var resetChannel = pusher.subscribe("reset_channel");
 
 // Listen to 'order placed' event
 var phMeasure = document.getElementById("ph-measure");
@@ -20,3 +21,7 @@ parametersChannel.bind("update", function (data) {
   luminosityMeasure.innerText = parseFloat(data.luminosity);
   waterLevelMeasure.innerText = parseFloat(data.water_level);
 });
+
+const reset = (e) => {
+  fetch("http://127.0.0.1:5000/reset", { method: "POST" });
+};

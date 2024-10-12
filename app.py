@@ -2,8 +2,11 @@ from flask import Flask, render_template, request
 from pusher import Pusher
 import sqlite3
 import os.path
+import pysher
+import sys
 
 app = Flask(__name__)
+
 
 # configure pusher object
 pusher = Pusher(
@@ -13,6 +16,23 @@ pusher = Pusher(
     cluster="sa1",
     ssl=True,
 )
+
+resetChannel = None
+clientPusher = pysher.Pusher("7bcef49942abe5d0aee5", "sa1")
+
+
+def resetCallback(message):
+    print("Si se pudo", file=sys.stderr, flush=True)
+
+
+def connectHandler(data):
+    print("HAAAAAAAAAAANDLER", file=sys.stderr)
+    reset_channel = clientPusher.subscribe("reset_channel")
+    reset_channel.bind("reset", resetCallback)
+
+
+clientPusher.connection.bind("pusher:connection_established", connectHandler)
+clientPusher.connect()
 
 
 def get_db_connection():
@@ -66,5 +86,11 @@ def update_paremeters():
     return "parameters updated"
 
 
+@app.route("/reset", methods=["POST"])
+def reset():
+    pusher.trigger("reset_channel", "reset", {})
+    return "Invernadero reiniciado"
+
+
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")
