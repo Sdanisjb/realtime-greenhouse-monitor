@@ -23,5 +23,5 @@ parametersChannel.bind("update", function (data) {
 });
 
 const reset = (e) => {
-  fetch("http://127.0.0.1:5000/reset", { method: "POST" });
+  fetch("https://ukuku.pythonanywhere.com/reset", { method: "POST" });
 };
